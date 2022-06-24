@@ -54,6 +54,10 @@ int main(void) {
 
 	setbuf(stdout, NULL);
 
+	int LongArray;
+	int LongArray2;
+	int LongArray3;
+
 	VIVIENDAS ListaCENSONACIONAL[TAMARRAY];
 
 	CENSISTAS ListaCENSISTA[TAMARRAY2];
@@ -61,10 +65,6 @@ int main(void) {
 	CATASTROS listaCATASTRO[TAMARRAY3];
 
 	int opciones;
-	int LongArray;
-	int LongArray2;
-	int LongArray3;
-
 
 	do{
 		printf("\n==================CENSO NACIONAL 2022==================");
@@ -88,16 +88,16 @@ int main(void) {
 							modiVIVIENDA(ListaCENSONACIONAL,LongArray);
 							break;
 						case 3:
-							lowerVIVIENDA(ListaCENSONACIONAL,LongArray);
+							//lowerVIVIENDA(ListaCENSONACIONAL,LongArray);
 							break;
 						case 4:
 							listVIVIENDA(ListaCENSONACIONAL,LongArray, listaCATASTRO, LongArray3);
 							break;
 						case 5:
-							listCENSISTA(ListaCENSONACIONAL,LongArray, ListaCENSISTA, LongArray2);
+							//listCENSISTA(ListaCENSONACIONAL,TAMARRAY, ListaCENSISTA, LongArray2);
 							break;
 						case 6:
-							LISTARCATASTRO(ListaCENSONACIONAL,LongArray, ListaCENSISTA, LongArray2,listaCATASTRO, LongArray3);
+							//LISTARCATASTRO(ListaCENSONACIONAL,LongArray, ListaCENSISTA, LongArray2,listaCATASTRO, LongArray3);
 							break;
 						default:
 							return 0;
@@ -116,9 +116,6 @@ int ADDVIVIENDA(VIVIENDAS ListaCENSONACIONAL[],int tamARRAY, CENSISTAS ListaCENS
 	CENSISTAS auxCENSISTAS;
 	CATASTROS auxCATASTROS;
 
-	char telefono[15];
-
-
 	if(UTN_getAlfaNum(auxVIVIENDAS.street,25,"\n-INGRESE CALLE Y DIRECCION DE LA CASA: ","\nERROR AL INTRODUCIR CALLE O DIRECCION DE LA CASA", 5)){
 		if(UTN_getNumero(&auxVIVIENDAS.cantPersons,"\n-CANTIDAD DE PERSONAS QUE VIVEN EN LA CASA: ","\nERROR AL INGRESAR LA CANTIDAD DE PERSONAS",1,10,5) == 0){
 			if(UTN_getNumero(&auxVIVIENDAS.cantRooms,"\n-CANTIDAD DE HABITACIONES QUE HAY EN LA CASA: ","\nERROR AL INGRESAR LA CANTIDAD DE HABITACIONES", 1,10,5) == 0){
@@ -127,15 +124,17 @@ int ADDVIVIENDA(VIVIENDAS ListaCENSONACIONAL[],int tamARRAY, CENSISTAS ListaCENS
 						if(UTN_getAlfaNum(auxCATASTROS.localidad, 51,"\n INGRESE LA LOCALIDAD EN DONDE VIVE: ","\n ERROR AL INGRESAR LA LOCALIDAD",5)){
 							if(UTN_getAlfaNum(auxCATASTROS.manzana, 25, "\n INGRESE LA MANZANA: ", "\n ERROR AL INGRESAR LA MANZANA", 5)){
 								if(UTN_getAlfaNum(auxCATASTROS.parcela, 25, "\n INGRESE LA PARCELA DE SU CASA: ", "\n ERROR AL INGRESAR LA PARCELA", 5)){
-									if(UTN_getString(auxCENSISTAS.nombre,51,"\n-INGRESE NOMBRE DEL ENCARGADO DE LA CASA: ","\n ERROR...AL INGRESAR ESE NOMBRE",10)){
+									addVIVIENDA(&ListaCENSONACIONAL,tamARRAY,auxVIVIENDAS.street,auxVIVIENDAS.cantPersons,auxVIVIENDAS.cantRooms,auxVIVIENDAS.typeApartment,auxVIVIENDAS.legCen);
+									addCATASTRO(&listaCATASTRO, LongArray3, auxCATASTROS.localidad, auxCATASTROS.manzana, auxCATASTROS.parcela);
+									/*if(UTN_getString(auxCENSISTAS.nombre,51,"\n-INGRESE NOMBRE DEL ENCARGADO DE LA CASA: ","\n ERROR...AL INGRESAR ESE NOMBRE",10)){
 										if(UTN_getNumero(&auxCENSISTAS.edad,"\n-INGRESE LA EDAD DEL CENSISTA: ","\nERROR... AL INGRESAR LA EDAD",20,100,5) == 0){
-											if(UTN_getAlfaNum(telefono,15,"\n-INGRESE NUMERO DE TELEFONO DEL CENSISTA: ","\nERROR... AL INGRESAR EL N° TELEFONO",10)){
-												addCen(ListaCENSISTA, tamARRAY2, auxVIVIENDAS.legCen,auxCENSISTAS.nombre,auxCENSISTAS.edad,telefono);
+												printf("\n-INGRESE SU NUMERO DE TELEFONO: ");
+												scanf("%d", &auxCENSISTAS.telefono);
+												addCen(ListaCENSISTA, tamARRAY2, auxVIVIENDAS.legCen,auxCENSISTAS.nombre,auxCENSISTAS.edad,auxCENSISTAS.telefono);
 												addVIVIENDA(ListaCENSONACIONAL,tamARRAY,auxVIVIENDAS.street,auxVIVIENDAS.cantPersons,auxVIVIENDAS.cantRooms,auxVIVIENDAS.typeApartment,auxVIVIENDAS.legCen);
 												addCATASTRO(listaCATASTRO, LongArray3, auxCATASTROS.localidad, auxCATASTROS.manzana, auxCATASTROS.parcela);
-											}
 										}
-									}
+									}*/
 								}
 							}
 						}
@@ -153,9 +152,9 @@ int modiVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int tamARRAY){
 	int id;
 
 	printf("\n==================CENSO NACIONAL 2022 / MODIFICAR VIVIENDA==================");
-	if(UTN_getNumero(&id,"\n- INGRESE ID DE LA VIVIENDA QUE DESEA MODIFICAR (rango de ID apartir desde 20001): ","\nERROR AL INGRESAR LA ID",20001,ListaCENSONACIONAL->id,10) == 0){
+	if(UTN_getNumero(&id,"\n- INGRESE ID DE LA VIVIENDA QUE DESEA MODIFICAR (rango de ID apartir desde 20001): ","\nERROR AL INGRESAR LA ID",20001,1000000,10) == 0){
 
-		modVIVIENDA(ListaCENSONACIONAL, tamARRAY, id);
+		modVIVIENDA(&ListaCENSONACIONAL, tamARRAY, id);
 
 	}
 
@@ -178,7 +177,7 @@ int lowerVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int tamARRAY){
 
 int listVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int tamARRAY, CATASTROS listaCATASTRO[], int LongArray3){
 
-	showlistVIVIENDA(ListaCENSONACIONAL, tamARRAY, listaCATASTRO, LongArray3);
+	showlistVIVIENDA(&ListaCENSONACIONAL, tamARRAY, &listaCATASTRO, LongArray3);
 
 	return 0;
 }

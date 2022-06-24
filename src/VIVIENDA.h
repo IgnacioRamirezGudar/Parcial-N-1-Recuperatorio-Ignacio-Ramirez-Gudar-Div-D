@@ -35,13 +35,13 @@ struct{
 
 
 
-int addVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int sizeArray, char streat[], int cantPersons, int cantRooms, int typeApartment, int legCen);
+int addVIVIENDA(VIVIENDAS* ListaCENSONACIONAL[], int sizeArray, char streat[], int cantPersons, int cantRooms, int typeApartment, int legCen);
 
-int addCATASTRO(CATASTROS listaCATASTRO[], int LongArray3, char localidad[], char manzana[], char parcela[]);
+int addCATASTRO(CATASTROS* listaCATASTRO[], int LongArray3, char localidad[], char manzana[], char parcela[]);
 
-int modVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int sizeArray, int id);
+int modVIVIENDA(VIVIENDAS* ListaCENSONACIONAL[], int sizeArray, int id);
 
-int showlistVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int tamARRAY, CATASTROS listaCATASTRO[], int LongArray3);
+int showlistVIVIENDA(VIVIENDAS* ListaCENSONACIONAL[], int tamARRAY, CATASTROS* listaCATASTRO[], int LongArray3);
 
 int lowVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int sizeArray, int id);
 

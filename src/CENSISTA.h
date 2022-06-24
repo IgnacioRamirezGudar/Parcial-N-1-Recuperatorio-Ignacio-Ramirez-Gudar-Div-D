@@ -23,7 +23,7 @@ struct{
 
 
 
-int addCen(CENSISTAS ListaCENSISTA[], int sizeArray, int legajo, char nombre[], int edad, char telefono[]);
+int addCen(CENSISTAS ListaCENSISTA[], int sizeArray, int legajo, char nombre[], int edad, int telefono);
 
 
 #endif /* CENSISTA_H_ */

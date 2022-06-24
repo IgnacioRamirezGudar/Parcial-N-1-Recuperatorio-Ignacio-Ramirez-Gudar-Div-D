@@ -30,37 +30,30 @@ int generateId2(){
 
 
 
-int addVIVIENDA(VIVIENDAS ListaCENSONACIONAL[],int sizeArray,char streat[], int cantPersons, int cantRooms, int typeApartment, int legCen){
+int addVIVIENDA(VIVIENDAS* ListaCENSONACIONAL[],int sizeArray,char streat[], int cantPersons, int cantRooms, int typeApartment, int legCen){
 
-	VIVIENDAS NewVIVIENDA;
-
-	NewVIVIENDA.id = generateId();
-	strcpy(NewVIVIENDA.street, streat);
-	NewVIVIENDA.cantPersons = cantPersons;
-	NewVIVIENDA.cantRooms = cantRooms;
-	NewVIVIENDA.typeApartment = typeApartment;
-	NewVIVIENDA.legCen = legCen;
-
-	ListaCENSONACIONAL[sizeArray] = NewVIVIENDA;
+	ListaCENSONACIONAL[sizeArray]->id = generateId();
+	strcpy(ListaCENSONACIONAL[sizeArray]->street,streat);
+	ListaCENSONACIONAL[sizeArray]->cantPersons = cantPersons;
+	ListaCENSONACIONAL[sizeArray]->cantRooms = cantRooms;
+	ListaCENSONACIONAL[sizeArray]->typeApartment = typeApartment;
+	ListaCENSONACIONAL[sizeArray]->legCen = legCen;
 
 	return 0;
 }
 
-int addCATASTRO(CATASTROS listaCATASTRO[], int LongArray3, char localidad[], char manzana[], char parcela[]){
+int addCATASTRO(CATASTROS* listaCATASTRO[], int LongArray3, char localidad[], char manzana[], char parcela[]){
 
-	CATASTROS NewCATASTROS;
 
-	NewCATASTROS.idCatastro = generateId2();
-	strcpy(NewCATASTROS.localidad, localidad);
-	strcpy(NewCATASTROS.manzana, manzana);
-	strcpy(NewCATASTROS.parcela, parcela);
-
-	listaCATASTRO[LongArray3] = NewCATASTROS;
+	listaCATASTRO[LongArray3]->idCatastro = generateId2();
+	strcpy(listaCATASTRO[LongArray3]->localidad,localidad);
+	strcpy(listaCATASTRO[LongArray3]->manzana,manzana);
+	strcpy(listaCATASTRO[LongArray3]->parcela,parcela);
 
 	return 0;
 }
 
-int modVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int sizeArray, int id){
+int modVIVIENDA(VIVIENDAS* ListaCENSONACIONAL[], int sizeArray, int id){
 
 	VIVIENDAS changeNewDataVIVIENDA;
 
@@ -72,17 +65,17 @@ int modVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int sizeArray, int id){
 	int newType;
 
 	for(int i = sizeArray; i <= sizeArray; i++){
-		if(ListaCENSONACIONAL[i].id == id){
-			if(ListaCENSONACIONAL[i].typeApartment == 1){
+		if(ListaCENSONACIONAL[i]->id == id){
+			if(ListaCENSONACIONAL[i]->typeApartment == 1){
 				strcpy(typeApartment , "CASA");
 			}else {
-				if(ListaCENSONACIONAL[i].typeApartment == 2){
+				if(ListaCENSONACIONAL[i]->typeApartment == 2){
 					strcpy(typeApartment , "DEPARTAMENTO");
 				}else {
-					if(ListaCENSONACIONAL[i].typeApartment == 3){
+					if(ListaCENSONACIONAL[i]->typeApartment == 3){
 						strcpy(typeApartment , "CASILLA");
 					}else {
-						if(ListaCENSONACIONAL[i].typeApartment == 4){
+						if(ListaCENSONACIONAL[i]->typeApartment == 4){
 							strcpy(typeApartment , "RANCHO");
 						}
 					}
@@ -90,12 +83,12 @@ int modVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int sizeArray, int id){
 			}
 
 			printf("\n==================CENSO NACIONAL 2022 / VIVIENDA A MODIFICAR======================");
-			printf("\nID: %d", ListaCENSONACIONAL[i].id);
-			printf("\nCALLE: %s", ListaCENSONACIONAL[i].street);
-			printf("\nCANT PERSONAS: %d", ListaCENSONACIONAL[i].cantPersons);
-			printf("\nCANT HABITACIONES: %d", ListaCENSONACIONAL[i].cantRooms);
+			printf("\nID: %d", ListaCENSONACIONAL[i]->id);
+			printf("\nCALLE: %s", ListaCENSONACIONAL[i]->street);
+			printf("\nCANT PERSONAS: %d", ListaCENSONACIONAL[i]->cantPersons);
+			printf("\nCANT HABITACIONES: %d", ListaCENSONACIONAL[i]->cantRooms);
 			printf("\nTIPO: %s", typeApartment);
-			printf("\nLEGAJO: %d", ListaCENSONACIONAL[i].legCen);
+			printf("\nLEGAJO: %d", ListaCENSONACIONAL[i]->legCen);
 			if(UTN_getNumero(&opcion,"\n==================================================================================="
 					"\n1) Cambiar datos de la calle"
 					"\n2) Cambiar la cantidad de personas que viven"
@@ -108,25 +101,25 @@ int modVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int sizeArray, int id){
 					case 1:
 							UTN_getAlfaNum(newstreat,25,"\n-INGRESE NUEVA CALLE Y DIRECCION DE LA CASA: ","\nERROR AL INTRODUCIR CALLE O DIRECCION DE LA CASA", 5);
 
-							strcpy(ListaCENSONACIONAL[i].street,newstreat);
+							strcpy(ListaCENSONACIONAL[i]->street,newstreat);
 
 						break;
 					case 2:
 							UTN_getNumero(&newcantPersons,"\n-NUEVA CANTIDAD DE PERSONAS QUE VIVEN EN LA CASA: ","\nERROR AL INGRESAR LA CANTIDAD DE PERSONAS",1,10,5);
 
-							ListaCENSONACIONAL[i].cantPersons = newcantPersons;
+							ListaCENSONACIONAL[i]->cantPersons = newcantPersons;
 
 						break;
 					case 3:
 							UTN_getNumero(&newcantRooms,"\n-NUEVA CANTIDAD DE HABITACIONES: ","\nERROR AL INGRESAR LA CANTIDAD DE HABITACIONES",1,10,5);
 
-							ListaCENSONACIONAL[i].cantRooms = newcantRooms;
+							ListaCENSONACIONAL[i]->cantRooms = newcantRooms;
 
 						break;
 					case 4:
 							UTN_getNumeroRange(&newType,"\n|1.CASA\t|\t2.DEPARTAMENTO\t|\t3.CASILLA\t|\t4.RANCHO| \nELIGA SU TIPO DE VIVIENDA: ","\nERROR AL ELEGIR EL TIPO DE VIVIENDA",1,4,5);
 
-							ListaCENSONACIONAL[i].typeApartment = newType;
+							ListaCENSONACIONAL[i]->typeApartment = newType;
 
 						break;
 					default:
@@ -135,22 +128,20 @@ int modVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int sizeArray, int id){
 				}
 			}
 
-			changeNewDataVIVIENDA.id = ListaCENSONACIONAL[i].id;
-			strcpy(changeNewDataVIVIENDA.street,ListaCENSONACIONAL[i].street);
-			changeNewDataVIVIENDA.cantPersons = ListaCENSONACIONAL[i].cantPersons;
-			changeNewDataVIVIENDA.cantRooms = ListaCENSONACIONAL[i].cantRooms;
-			changeNewDataVIVIENDA.typeApartment = ListaCENSONACIONAL[i].typeApartment;
-			changeNewDataVIVIENDA.legCen = ListaCENSONACIONAL[i].legCen;
-			ListaCENSONACIONAL[sizeArray] = changeNewDataVIVIENDA;
+			changeNewDataVIVIENDA.id = ListaCENSONACIONAL[i]->id;
+			strcpy(changeNewDataVIVIENDA.street,ListaCENSONACIONAL[i]->street);
+			changeNewDataVIVIENDA.cantPersons = ListaCENSONACIONAL[i]->cantPersons;
+			changeNewDataVIVIENDA.cantRooms = ListaCENSONACIONAL[i]->cantRooms;
+			changeNewDataVIVIENDA.typeApartment = ListaCENSONACIONAL[i]->typeApartment;
+			changeNewDataVIVIENDA.legCen = ListaCENSONACIONAL[i]->legCen;
+			//ListaCENSONACIONAL[sizeArray] = changeNewDataVIVIENDA;
 		}
 	}
 
 	return 0;
 }
 
-int showlistVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int tamARRAY, CATASTROS listaCATASTRO[], int LongArray3){
-
-	VIVIENDAS lastStreet;
+int showlistVIVIENDA(VIVIENDAS* ListaCENSONACIONAL[], int tamARRAY, CATASTROS* listaCATASTRO[], int LongArray3){
 
 	char typeApartment[51];
 
@@ -158,42 +149,27 @@ int showlistVIVIENDA(VIVIENDAS ListaCENSONACIONAL[], int tamARRAY, CATASTROS lis
 	printf("\n|-------------------------------------------------------------------------------------------------------------------------------------------------------|");
 	printf("\n|ID\t|\tCALLE\t|\tCANTIDAD DE PERSONAS\t|\tCANTIDAD DE HABITACIONES\t\t|\tTIPO DE VIVIENDA\t|\tLEGAJO\t|IDCATASTRO|LOCALIDAD|MANZANA|PARCELA");
 	printf("\n|=======================================================================================================================================================|");
-	for(int i = 1; i <= tamARRAY;i++){
-			if(ListaCENSONACIONAL[i].id > 0){
-						for(int i = 1; i < tamARRAY - 1; i++){
-										for(int x = i + 1; x < tamARRAY; x++){
-											if(strcmp(ListaCENSONACIONAL[i].street, ListaCENSONACIONAL[x].street) > 0){
-												lastStreet = ListaCENSONACIONAL[i];
-												ListaCENSONACIONAL[i] = ListaCENSONACIONAL[x];
-												ListaCENSONACIONAL[x] = lastStreet;
-											}
-											if(strcmp(ListaCENSONACIONAL[i].street, ListaCENSONACIONAL[x].street) == 0){
-												if(ListaCENSONACIONAL[i].cantPersons > ListaCENSONACIONAL[x].cantPersons){
-													lastStreet = ListaCENSONACIONAL[i];
-													ListaCENSONACIONAL[i] = ListaCENSONACIONAL[x];
-													ListaCENSONACIONAL[x] = lastStreet;
-												}
-											}
-										}
-									}
-									if(ListaCENSONACIONAL[i].typeApartment == 1){
+
+	for(int i = 1; i <= tamARRAY; i++){
+		if(ListaCENSONACIONAL[i]->id > 0){
+			if(ListaCENSONACIONAL[i]->typeApartment == 1){
 										strcpy(typeApartment , "CASA");
 									} else {
-										if(ListaCENSONACIONAL[i].typeApartment == 2){
+										if(ListaCENSONACIONAL[i]->typeApartment == 2){
 											strcpy(typeApartment , "DEPARTAMENTO");
 										} else {
-											if(ListaCENSONACIONAL[i].typeApartment == 3){
+											if(ListaCENSONACIONAL[i]->typeApartment == 3){
 												strcpy(typeApartment , "CASILLA");
 											}  else {
-												if(ListaCENSONACIONAL[i].typeApartment == 4){
+												if(ListaCENSONACIONAL[i]->typeApartment == 4){
 													strcpy(typeApartment , "RANCHO");
 												}
 											}
 										}
 									}
-									printf("\n|%d\t|\t%s\t|\t\t%d\t\t|\t\t%d\t\t\t\t|\t%s\t\t\t|\t%d\t|%d\t|%s\t|%s\t|%s|", ListaCENSONACIONAL[i].id, ListaCENSONACIONAL[i].street,ListaCENSONACIONAL[i].cantPersons,ListaCENSONACIONAL[i].cantRooms,typeApartment,ListaCENSONACIONAL[i].legCen,listaCATASTRO[i].idCatastro,listaCATASTRO[i].localidad,listaCATASTRO[i].manzana,listaCATASTRO[i].parcela);
-									printf("\n|-------------------------------------------------------------------------------------------------------------------------------------------------------|");
-					}
+			printf("\n|%d\t|\t%s\t|\t\t%d\t\t|\t\t%d\t\t\t\t|\t%s\t\t\t|\t%d\t|%d\t|%s\t|%s\t|%s|", ListaCENSONACIONAL[i]->id, ListaCENSONACIONAL[i]->street,ListaCENSONACIONAL[i]->cantPersons,ListaCENSONACIONAL[i]->cantRooms,typeApartment,ListaCENSONACIONAL[i]->legCen,listaCATASTRO[i]->idCatastro,listaCATASTRO[i]->localidad,listaCATASTRO[i]->manzana,listaCATASTRO[i]->parcela);
+			printf("\n|-------------------------------------------------------------------------------------------------------------------------------------------------------|");
+		}
 	}
 
 	return 0;
